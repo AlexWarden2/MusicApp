@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { useTable } from "react-table";
+import './App.css'
+import { Like } from './Like'
+
 
 const profile = {
   name: 'Jimmy Sax',
   genre: 'Genre: Saxaphhone',
   imageUrl: 'https://www.selmer.fr/cdn/shop/articles/JimmySaxAxos-61af2cfa220f8.jpg',
-  imageHeight: 810/5,
-  imageWidth:540/5,
+  imageHeight: 810,
+  imageWidth:540,
   intro: 'Jim Rolland known as "Jimmy Sax" is an incredible saxophonist, multi-intrumentist, composer and entertainer more oriented towards electronic music. His track record of 1,500 shows, 1 million followers, 300 Million views and 2 golden discs has turned him into a unique figure in the world of saxophone and electronic music.'
 };
 
 const popularSongs = [
-  { id: 1, title: 'No Man No Cry', YouTubeViews: 196989072, SpotifyViews: 66581703, ReleaseDate: '27 Apr 2015', coverImg: 'https://i.scdn.co/image/ab67616d0000b2738deb54355bae042bc482af5b', length: 6.59, like: 'Like' }, 
+  { id: 1, title: 'No Man No Cry', YouTubeViews: 196989072, SpotifyViews: 66581703, ReleaseDate: '27 Apr 2015', coverImg: 'https://i.scdn.co/image/ab67616d0000b2738deb54355bae042bc482af5b', length: 6.59, like: 'Like', fav: 'fav' }, 
   { id: 2, title: 'Time', YouTubeViews: 37638501, SpotifyViews: 23550517, ReleaseDate: '26 Jul 2018', coverImg: 'https://www.intoscana.it/wp-content/uploads/Jimmy-Sax-2022.jpg', length: 2.44, like: 'Like' }, 
   { id: 3, title: 'Blue', YouTubeViews: 32471210, SpotifyViews: 'N/A', ReleaseDate: '4 Oct 2016', coverImg: 'https://i1.sndcdn.com/artworks-000346830714-lk41ps-t500x500.jpg', length: 5.51, like: 'Like' }, 
   { id: 4, title: 'Smile', YouTubeViews: 369656, SpotifyViews: 3979591, ReleaseDate: '29 Jun 2021', coverImg: 'https://i.scdn.co/image/ab67616d0000b273dc07263577913accd9a47a43', length: 2.29, like: 'Like' }
@@ -19,7 +22,11 @@ const popularSongs = [
 
 export default function App() {
 
-  const [count, setCount] = useState(0)
+  const [ counter, setCounter ] = useState(0)
+
+  const handleIncrease = () => {
+    setCounter(previousState => previousState + 1)
+  } 
 
   const data = React.useMemo(() => popularSongs, [])
   const columns = React.useMemo(() => [
@@ -60,15 +67,19 @@ export default function App() {
       accessor: "length"
     },
     {
-      Header: "Add to favourites",
+      Header: "Like",
       accessor: "like",
-      Cell: tableProps => (
-        <button onClick={() => setCount((count) => count + 1)}>
-          {tableProps.row.original.like}
-          count is {count}
+      Cell: 
+        <button 
+        onClick={handleIncrease}>
+          Like
         </button>
-      )
     },
+    {
+      Header: "Add to queue",
+      accessor: "fav",
+      Cell: <Like />
+    }
   ], 
   []
   );
@@ -122,8 +133,13 @@ export default function App() {
           </table>
         </div>
       </div>
+
+      <h3>Songs liked: {counter}</h3>
+
+
     </>
 
     
   );
 }
+
