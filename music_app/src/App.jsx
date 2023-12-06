@@ -1,26 +1,39 @@
-import React, { useState } from 'react';
-// import { useTable } from "react-table";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom'
+import { NavBar } from './layout'
+import * as Pages from './pages'
 
 import { ProfileIntro, SongTable, Background } from './components'
 import './App.css'
 
 
-function App() {
-
+function App() { 
   return (
   
   <>
-    <ProfileIntro />
+    <div className="App">
+      <Routes>
+        <Route path='/' element={<NavBar />}>
+          <Route index element={<Pages.Home />} />
+
+          <Route path="/about" element={<Pages.About />} />
+
+          <Route path="/form" element={<Pages.Form />} />
+        </Route>
+
+
+
+        <Route path="*" element={<Pages.NotFound/>} />
+      </Routes>
+    </div>
+
+    {/* <ProfileIntro />
 
     <SongTable /> 
 
-    <Background/>
+    <Background/> */}
     
   </>
-
-
-
-
   );
 }
 
