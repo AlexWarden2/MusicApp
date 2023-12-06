@@ -19,6 +19,12 @@ function App() {
           <Route path="/about" element={<Pages.About />} />
 
           <Route path="/form" element={<Pages.Form />} />
+
+          <Route path="/explore">
+            <Route index element={<Pages.Explore />} />
+            <Route path=":id" element={<Pages.ExploreSong/>}/>
+          </Route>
+
         </Route>
 
 

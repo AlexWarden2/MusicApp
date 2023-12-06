@@ -1,0 +1,11 @@
+
+button {
+    background-color: firebrick;
+    padding: 12px 24px;
+    font-size: 19px;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    margin: 20px 0;
+    cursor: pointer;
+  }

@@ -37,6 +37,14 @@ const NavBar = () => {
               Playlist
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to='/explore'
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              Explore
+            </NavLink>
+          </li>
         </ul>
       </nav>
       <Outlet />
